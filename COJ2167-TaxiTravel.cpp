@@ -12,6 +12,6 @@ int main() {
 			cin >> s;
 			S += s;
 		}
-		cout << (int) ceil(S / 4.0) << endl;
+		cout << ((S / 4) + (S % 4 == 0 ? 0 : 1)) << endl;
 	}
 }
