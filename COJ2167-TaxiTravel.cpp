@@ -25,14 +25,20 @@ int main() {
 		taxis[1] -= min;
 		S += taxis[2] / 2;
 		taxis[2] = taxis[2] % 2;
-		min = (taxis[1] < taxis[2] ? taxis[1] : taxis[2]);
-		taxis[3] += min;
-		taxis[1] -= min;
-		taxis[2] -= min;
-		min = (taxis[1] < taxis[3] ? taxis[1] : taxis[3]);
-		S += min;
-		taxis[3] -= min;
-		taxis[1] -= min;
+		if (taxis[2] > 0) {
+			if (taxis[1] > 1) {
+				taxis[1] -= 2;
+				taxis[2]--;
+				S++;
+			}
+			else if (taxis[1] > 0) {
+				taxis[1]--;
+				taxis[2]--;
+				S++;
+			}
+		}
+		S += taxis[1] / 4;
+		taxis[1] = taxis[1] % 4;
 		for (int i = 1; i < 4; i++) {
 			if (taxis[i] > 0) {
 				S += taxis[i];
