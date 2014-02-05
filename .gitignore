@@ -214,3 +214,7 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 *.exe
+
+*.o
+
+COJ1110-Houseboat
