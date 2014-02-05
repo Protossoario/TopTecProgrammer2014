@@ -23,7 +23,7 @@ using namespace std;
 #define AREA 50
 
 int calcYears(double X, double Y) {
-	return (int) ceil(((pow(X, 2) + pow(Y, 2)) * PI / 2) / AREA);
+	return (int) (((pow(X, 2) + pow(Y, 2)) * PI / 2) / AREA + 1);
 }
 
 int main() {
