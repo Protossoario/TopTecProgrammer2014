@@ -39,6 +39,10 @@ int main() {
 		}
 		S += taxis[1] / 4;
 		taxis[1] = taxis[1] % 4;
+		if (taxis[1] > 0) {
+			S++;
+			taxis[1] = 0;
+		}
 		for (int i = 1; i < 4; i++) {
 			if (taxis[i] > 0) {
 				S += taxis[i];
