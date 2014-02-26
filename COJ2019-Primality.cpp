@@ -4,7 +4,13 @@
 #include <cstdlib>
 using namespace std;
 bool isPrime(int N) {
-	if (N % 2 == 0 && N > 2) {
+	if (N == 1) {
+		return false;
+	}
+	if (N == 2) {
+		return true;
+	}
+	if (N % 2 == 0) {
 		return false;
 	}
 	int i = 3;
