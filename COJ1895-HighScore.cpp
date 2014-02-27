@@ -29,14 +29,13 @@ int minOffset(const char &c) {
 int main(int argc, const char *argv[])
 {
 	string s;
-	int N, sum, ind1, min, min_ind1, min_ind2;
+	int N, sum, ind1, max, left_gap, right_gap, max_ind1, max_ind2;
 	bool A;
 	cin >> N;
 	while (N--) {
 		cin >> s;
-		min = INT_MAX;
-		sum = 0;
-		ind1 =  min_ind1 = min_ind2 = -1;
+		max = sum = 0;
+		left_gap = right_gap = ind1 =  max_ind1 = max_ind2 = -1;
 		A = false;
 		for (unsigned int i = 0; i < s.length(); i++) {
 			if (s[i] != 'A') {
@@ -44,10 +43,10 @@ int main(int argc, const char *argv[])
 				if (A) {
 					A = false;
 					int dist = i - ind1;
-					if (dist < min) {
-						min = dist;
-						min_ind1 = ind1;
-						min_ind2 = i;
+					if (dist >= max) {
+						max = dist;
+						max_ind1 = ind1;
+						max_ind2 = i;
 					}
 				}
 			}
@@ -57,28 +56,52 @@ int main(int argc, const char *argv[])
 			}
 		}
 		if (A) {
-			ind2 = s.length();
+			A = false;
+			int dist = s.length() - ind1;
+			if (dist >= max) {
+				max = dist;
+				max_ind1 = ind1;
+				max_ind2 = s.length();
+			}
 		}
-		if (min_ind1 == -1) {
+		bool stop = false;
+		int i = 1;
+		while (!stop && i < s.length()) {
+			if (s[i] != 'A') {
+				stop = true;
+				left_gap = i;
+			}
+			i++;
+		}
+		int j = i;
+		while (j < s.length()) {
+			if (s[j] != 'A') {
+				i = j;
+			}
+			j++;
+		}
+		right_gap = j - i;
+		if (max_ind1 == -1) {
 			sum += s.length() - 1;
 		}
-		else if (min_ind1 == 0) {
-			sum += s.length() - min;
+		else if (max_ind1 == 0) {
+			sum += s.length() - max;
 		}
-		else if (min_ind2 == s.length()) {
-			sum += s.length() - min - 1;
+		else if (max_ind2 == s.length()) {
+			sum += s.length() - max - 1;
 		}
 		else {
-			int left = s.length() - min - 1;
-			int right = s.length() - min;
+			int left = max_ind1 - 1;
+			int right = s.length() - max_ind2;
+			int travel;
 			if (left < right) {
-				sum += left;
+				travel = left * 2 + right;
 			}
 			else {
-				sum += right;
+				travel = right * 2 + left;
 			}
+			sum += min(min(travel, s.length() - left_gap), s.length() - right_gap);
 		}
-		cout << min << " " << min_ind1 << " " << min_ind2 << endl;
 		cout << sum << endl;
 	}
 	return 0;
