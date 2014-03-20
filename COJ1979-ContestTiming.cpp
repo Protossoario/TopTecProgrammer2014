@@ -26,23 +26,26 @@ int main(int argc, const char *argv[])
 		cout << "-1" << endl;
 	}
 	else if (D == 11) {
-		if (H == 11) {
-			if (M == 11) {
-				cout << "0" << endl;
-			}
-			else if (M > 11) {
-				cout << (M - 11) << endl;
-			}
-			else {
+		if (H < 11) {
+			cout << "-1" << endl;
+		}
+		else if (H == 11) {
+			if (M < 11) {
 				cout << "-1" << endl;
 			}
-		}
-		else if (H > 11) {
-			cout << (M + 49 + (H - 12) * 60) << endl;
+			else if (M == 11) {
+				cout << "0" << endl;
+			}
+			else {
+				cout << (M - 11) << endl;
+			}
 		}
 		else {
-			cout << () << endl;
+			cout << (M + 49 + (H - 12) * 60) << endl;
 		}
+	}
+	else {
+		cout << (769 + (D - 12) * 1440 + H * 60 + M) << endl;
 	}
 	return 0;
 }
